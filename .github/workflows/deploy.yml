@@ -37,6 +37,7 @@ jobs:
           sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
             cd $APP_DIR
             git pull origin main
+            source ~/.bashrc
             npm install
             pm2 restart all
           EOF

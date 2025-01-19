@@ -57,6 +57,13 @@ jobs:
             sudo apt install -y npm
           fi
 
+          # Install pm2 globally if not already installed
+          if ! command -v pm2 &> /dev/null
+          then
+            echo "pm2 not found, installing..."
+            sudo npm install -g pm2
+          fi
+
           # Navigate to your project directory
           cd /home/appserver/daily2do
 
@@ -66,7 +73,11 @@ jobs:
           # Install project dependencies
           npm install
 
-          # Start the application
-          npm run start
+          # Restart the application using pm2
+          pm2 startOrRestart ecosystem.config.js --name daily2do || pm2 restart daily2do
+
+          # Save the pm2 process list and set up startup script
+          pm2 save
+          pm2 startup | sudo bash
         EOF
 

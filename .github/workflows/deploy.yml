@@ -34,10 +34,5 @@ jobs:
           PASSWORD: ${{ secrets.SSH_PASSWORD }}
           APP_DIR: /home/appserver
         run: |
-          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
-            cd $APP_DIR
-            git pull origin main
-            source ~/.bashrc
-            npm install
-            pm2 restart all
-          EOF
+          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP "bash -lc 'cd $APP_DIR && git pull origin main && npm install && pm2 restart all'"
+        

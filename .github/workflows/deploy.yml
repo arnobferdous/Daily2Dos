@@ -23,7 +23,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        npm install
+        /home/appserver/.nvm/versions/node/v23.6.0/bin/npm install
 
 #    - name: Run tests
 #      run: |
@@ -51,6 +51,6 @@ jobs:
         ssh -o StrictHostKeyChecking=no appserver@52.146.19.201 << 'EOF'
           cd /home/appserver/daily2do
           git pull origin main
-          npm install
-          npm run start
+          /home/appserver/.nvm/versions/node/v23.6.0/bin/npm install
+          /home/appserver/.nvm/versions/node/v23.6.0/bin/npm run start
         EOF

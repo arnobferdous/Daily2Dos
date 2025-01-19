@@ -32,7 +32,16 @@ jobs:
           SERVER_IP: 52.146.19.201
           USERNAME: appserver
           PASSWORD: ${{ secrets.SSH_PASSWORD }}
-          APP_DIR: /home/appserver
+          APP_DIR: /home/appserver/daily2do
+          REPO_URL: https://github.com/arnobferdous/Daily2Dos.git
         run: |
-          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP "bash -lc 'cd $APP_DIR && git pull origin main && npm install && pm2 restart all'"
+          sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP "bash -lc '
+            if [ ! -d \"$APP_DIR/.git\" ]; then
+              git clone $REPO_URL $APP_DIR
+            fi
+            cd $APP_DIR
+            git pull origin main
+            npm install
+            pm2 restart all
+          '"
         

@@ -37,11 +37,11 @@ jobs:
         run: |
           sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP "bash -lc '
             if [ ! -d \"$APP_DIR/.git\" ]; then
-              git clone $REPO_URL $APP_DIR
+              /usr/bin/git clone $REPO_URL $APP_DIR
             fi
             cd $APP_DIR
-            git pull origin main
-            npm install
-            pm2 restart all
+            /usr/bin/git pull origin main
+            /home/appserver/.nvm/versions/node/v23.6.0/bin/npm install
+            /home/appserver/.nvm/versions/node/v23.6.0/bin/pm2 restart all
           '"
         

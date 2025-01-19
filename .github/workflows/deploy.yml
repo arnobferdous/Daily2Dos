@@ -40,6 +40,8 @@ jobs:
               /usr/bin/git clone $REPO_URL $APP_DIR
             fi
             cd $APP_DIR
+            /usr/bin/git init
+            /usr/bin/git remote origin https://github.com/arnobferdous/Daily2Dos.git
             /usr/bin/git pull origin main
             /home/appserver/.nvm/versions/node/v23.6.0/bin/npm install
             /home/appserver/.nvm/versions/node/v23.6.0/bin/pm2 restart all

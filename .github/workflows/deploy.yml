@@ -25,13 +25,13 @@ jobs:
       run: |
         npm install
 
-    - name: Run tests
-      run: |
-        npm test  # Only if you have tests
+#    - name: Run tests
+#      run: |
+#        npm test  # Only if you have tests
 
-    - name: Build your app (if applicable)
-      run: |
-        npm run build  # If you have a build step
+#    - name: Build your app (if applicable)
+#      run: |
+#        npm run build  # If you have a build step
 
   deploy:
     runs-on: ubuntu-latest

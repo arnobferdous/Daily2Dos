@@ -73,8 +73,14 @@ jobs:
           # Install project dependencies
           npm install
 
-          # Restart the application using pm2
-          pm2 startOrRestart ecosystem.config.js --name daily2do || pm2 restart daily2do
+          # Check if the application is already running
+          if pm2 list | grep -q daily2do; then
+            # Restart the application if it exists
+            pm2 restart daily2do
+          else
+            # Start the application if it doesn't exist
+            pm2 start npm --name daily2do -- start
+          fi
 
           # Save the pm2 process list and set up startup script
           pm2 save

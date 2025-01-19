@@ -1,0 +1,40 @@
+# .github/workflows/deploy.yml
+
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install SSH Client and sshpass
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y sshpass
+
+    - name: Deploy to Server
+      env:
+        SERVER_IP: 52.146.19.201
+        USERNAME: appserver
+        PASSWORD: dAfwas-2jyxso-gasmaw
+        APP_DIR: /home/appserver
+      run: |
+        sshpass -p "$PASSWORD" ssh -o StrictHostKeyChecking=no $USERNAME@$SERVER_IP << 'EOF'
+          cd $APP_DIR
+          git pull origin main
+          npm install
+          pm2 restart all
+        EOF

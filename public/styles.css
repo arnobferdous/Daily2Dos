@@ -1,0 +1,136 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.todoHeader {
+    display: flex;
+    justify-content: space-between; /* Align items to space them out */
+    align-items: center; /* Center items vertically */
+    padding: 10px 0; /* Add some padding for aesthetics */
+}
+
+.logo {
+    flex-grow: 1; /* Allow the logo to take up available space */
+}
+
+.dropdown {
+    margin-left: auto; /* Push the dropdown to the right */
+}
+
+#todoInput {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px; /* Add margin to create space between the header and input */
+}
+
+#todoFilter {
+    margin-bottom: 2px;
+    background-color: #ffffff;
+    border: 1px solid #e8e8e8;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#todoFilter .input-group {
+    margin-top: 0;
+}
+
+#todoFilter .form-control:focus {
+  box-shadow: none;
+}
+
+#todoFilter .actionBtnGroup button:focus {
+    box-shadow: none;
+}
+
+#quillEditor {
+    overflow-y: auto; /* Allow vertical scrolling if needed */
+    height: auto; /* Ensure the height is set to auto for dynamic adjustment */
+}
+
+#todoList .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-group {
+    margin-top: 10px; /* Add some space above the input group */
+}
+
+.input-group-append {
+    margin-left: auto; /* Push the Add button to the right */
+}
+
+.btn {
+    margin-left: 5px; /* Add some space between buttons */
+}
+
+.btn-success {
+    background-color: green; /* Change Add button color to green */
+    border-color: green; /* Ensure border matches the button color */
+    width: 120px; /* Make the Add button a little wider */
+    height: 90px; /* Adjust height of the button to match with text box */
+}
+
+.actionBtnGroup {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Pushes the action buttons to the right */
+}
+
+.actionBtnGroup button {
+    margin-left: 5px; /* Space between buttons */
+    width: 40px; /* Set a consistent width for buttons to avoid breaking alignment */
+    height: 40px; /* Make buttons square for better aesthetics */
+}
+
+#searchInput {
+    width: 30%; /* Set the width of the search input to 30% */
+}
+
+.todo-container {
+    display: flex;
+    flex-direction: column; /* Stack title and timestamp vertically */
+    width: 100%; /* Ensure it takes full width */
+}
+
+.todo-title {
+    text-transform: lowercase;
+    margin-bottom: 5px; /* Keep this to 5px for the gap */
+    overflow: hidden; /* Hide overflowed text */
+    text-overflow: ellipsis; /* Show ellipsis for long titles */
+}
+
+.todo-title:first-letter {
+    text-transform: uppercase;
+}
+
+.todo-title p {
+    margin-bottom: 0;
+}
+
+.timestamp {
+    color: gray; /* Set the color for timestamps */
+    font-size: 12px; /* Set the font size for timestamps */
+    display: block; /* Ensure timestamp takes full width */
+    margin-top: 0; /* Remove any additional margin */
+}
+
+.dropdown-menu {
+    right: 0; /* Align the dropdown to the right */
+    left: auto; /* Prevent it from stretching to the left */
+    min-width: 200px; /* Set a minimum width for the dropdown */
+}
+
+.dropdown-toggle {
+    border: none; /* Remove border from the button */
+    background-color: #6c757d; /* Make the background transparent */
+}
+
+.dropdown-toggle:focus {
+    outline: none; /* Remove outline on focus */
+    box-shadow: none;
+}

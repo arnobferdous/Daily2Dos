@@ -23,19 +23,11 @@ jobs:
 
     - name: Install dependencies
       run: |
-        /home/appserver/.nvm/versions/node/v23.6.0/bin/npm install
-
-#    - name: Run tests
-#      run: |
-#        npm test  # Only if you have tests
-
-#    - name: Build your app (if applicable)
-#      run: |
-#        npm run build  # If you have a build step
+        npm install
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build 
+    needs: build  # Ensure deployment happens after successful build
 
     steps:
     - name: Checkout code
@@ -49,8 +41,32 @@ jobs:
     - name: Deploy to production server
       run: |
         ssh -o StrictHostKeyChecking=no appserver@52.146.19.201 << 'EOF'
+          # Check if Node.js is installed
+          if ! command -v node &> /dev/null
+          then
+            echo "Node.js not found, installing..."
+            # Install Node.js (if necessary)
+            curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+            sudo apt install -y nodejs
+          fi
+
+          # Check if npm is installed
+          if ! command -v npm &> /dev/null
+          then
+            echo "npm not found, installing..."
+            sudo apt install -y npm
+          fi
+
+          # Navigate to your project directory
           cd /home/appserver/daily2do
+
+          # Pull the latest changes from the main branch
           git pull origin main
-          /home/appserver/.nvm/versions/node/v23.6.0/bin/npm install
-          /home/appserver/.nvm/versions/node/v23.6.0/bin/npm run start
+
+          # Install project dependencies
+          npm install
+
+          # Start the application
+          npm run start
         EOF
+
